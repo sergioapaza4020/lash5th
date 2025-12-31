@@ -1,12 +1,27 @@
-import { CountdownTimer } from "@/components/CountdownTimer";
-import { Box } from "@mui/material";
+import { getAnniversaryDate } from "../../utils/date.utils";
+import { AnniversaryConfetti } from "../components/confetti/AnniversaryConfetti";
+import { CountdownTimer } from "../components/countdown/CountdownTimer";
+import { LetterEnvelope } from "../components/letter/LetterEnvelope";
 
 export default function Home() {
-  const eventDate = '2025-12-31T00:00:00'
+  const today = new Date();
+  const anniversaryDate = getAnniversaryDate(
+    2025,
+    today.getMonth()
+  );
 
   return (
-    <Box>
-      <CountdownTimer targetDate={eventDate} />
-    </Box>
+    <main style={{
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 40,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}>
+      <AnniversaryConfetti anniversaryDate={anniversaryDate} />
+      <CountdownTimer targetDate={anniversaryDate} />
+      <LetterEnvelope />
+    </main>
   );
 }
